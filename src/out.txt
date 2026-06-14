@@ -1,0 +1,11 @@
+builtins.c
+executor.c
+main.c
+out.txt
+parser.c
+pipe.c
+redirection.c
+signals.c
+MyShell > 
+MyShell > 
+Bye!
