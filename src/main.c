@@ -22,13 +22,13 @@ int main()
 
     while (1)
     {
-        //write(stdout , "MyShell > ",11);
+        
         line = readline("C_Shell > ");
 	
 	
         if (line == NULL)
         {
-            printf("\nBye!\n");
+            printf("\nTerminated!\n");
             break;
         }
 
@@ -49,6 +49,7 @@ int main()
 
         execute(tokens);
         free_tokens(tokens);
+        free(line);
     }
 
     return 0;

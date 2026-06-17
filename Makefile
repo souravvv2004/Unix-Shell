@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Iinclude -D_POSIX_C_SOURCE=200809L
+CFLAGS = -Wall  -Iinclude -D_POSIX_C_SOURCE=200809L
 LIBS = -lreadline
 
 SRC = src/main.c src/executor.c src/parser.c \

@@ -44,7 +44,7 @@ void execute(char** args)
 
     if (pid == 0)
     {
-        // redirection inside child ← key fix
+        
         int j = 0;
         while (args[j] != NULL)
         {

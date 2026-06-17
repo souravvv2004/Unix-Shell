@@ -13,7 +13,7 @@
 void sigint_handler(int sig)
 {
 	(void) sig;
-    write(STDOUT_FILENO, "\nMyShell > ", 11);
+    write(STDOUT_FILENO, "\nC_Shell > ", 11);
 }
 
 /**
@@ -22,6 +22,7 @@ void sigint_handler(int sig)
  */
 void sigchld_handler(int sig)
 {
+    (void) sig;
     while (waitpid(-1, NULL, WNOHANG) > 0);
 }
 

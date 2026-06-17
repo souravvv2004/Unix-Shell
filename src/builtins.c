@@ -1,4 +1,5 @@
 #include "../include/builtins.h"
+#include <readline/history.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,7 +18,9 @@ int is_builtin(const char* command)
        
         strcmp(command, "exit") == 0 ||
         
-        strcmp(command, "help") == 0)
+        strcmp(command, "help") == 0  ||
+        
+        strcmp(command, "history") == 0)
     {
         return 1;
     }
@@ -52,6 +55,14 @@ void execute_builtin(const char* command, char** args)
     }
 
 
+
+    else if (strcmp(command, "history") == 0)
+    {
+        HIST_ENTRY** hist = history_list();
+        if (hist)
+            for (int i = 0; hist[i] != NULL; i++)
+                printf("%d  %s\n", i + 1, hist[i]->line);
+    }
     else if (strcmp(command, "help") == 0)
     {
         printf("Built-in commands:\n");
