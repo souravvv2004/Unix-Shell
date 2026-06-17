@@ -38,9 +38,6 @@ shell/
 │   ├── pipe.h
 │   └── signals.h
 │
-├── docs/               # Doxygen generated docs
-├── tests/              # Test scripts
-├── Doxyfile            # Doxygen config
 ├── Makefile
 └── README.md
 ```
@@ -51,7 +48,7 @@ shell/
 
 ### Prerequisites
 ```bash
-sudo apt install gcc libreadline-dev doxygen graphviz
+sudo apt install gcc libreadline-dev
 ```
 
 ### Compile
