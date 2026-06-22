@@ -15,6 +15,69 @@ A Unix shell built from scratch in C using system calls like `fork()`, `exec()`,
 - Arrow key navigation and command history via `readline`
 
 ---
+## Architecture
+
+```
+                        +------------------+
+                        |   User Input     |
+                        |  (keyboard)      |
+                        +--------+---------+
+                                 |
+                                 v
+                        +------------------+
+                        |     main.c       |
+                        |  readline loop   |
+                        |  + history       |
+                        +--------+---------+
+                                 |
+                                 v
+                        +------------------+
+                        |    parser.c      |
+                        |  tokenize input  |
+                        |  tokens[]        |
+                        +--------+---------+
+                                 |
+                                 v
+                        +------------------+
+                        |   executor.c     |
+                        |  route command   |
+                        +--+--+--+--+------+
+                           |  |  |  |
+           +---------------+  |  |  +------------------+
+           |                  |  |                     |
+           v                  v  v                     v
+   +-----------+      +-------+  +--------+   +---------------+
+   | builtins  |      | pipe.c|  |redirect|   | fork+execvp   |
+   |   .c      |      |pipe() |  |  .c    |   | child process |
+   | cd,exit   |      |dup2() |  |open()  |   |               |
+   | help      |      |       |  |dup2()  |   |               |
+   | history   |      +---+---+  +---+----+   +-------+-------+
+   +-----------+          |          |                 |
+                          +----+-----+                 |
+                               |                       |
+                               +-----------+-----------+
+                                           |
+                                           v
+                                  +------------------+
+                                  |   OS / kernel    |
+                                  |  executes cmd    |
+                                  +--------+---------+
+                                           |
+                                           v
+                                  +------------------+
+                                  | Terminal output  |
+                                  +------------------+
+
+   signals.c (async)
+   +-----------------+
+   | SIGINT  --> new |
+   |   prompt        |
+   | SIGCHLD --> no  |
+   |   zombies       |
+   +-----------------+
+```
+
+---
 
 ## Project Structure
 
@@ -48,7 +111,7 @@ shell/
 
 ### Prerequisites
 ```bash
-sudo apt install gcc libreadline-dev
+sudo apt install gcc libreadline-de
 ```
 
 ### Compile

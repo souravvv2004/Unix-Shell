@@ -33,7 +33,7 @@ int main()
         }
 
 
-        else
+        if(*line)
         {
     
             add_history(line);         
@@ -44,6 +44,7 @@ int main()
         if (tokens == NULL || tokens[0] == NULL)
         {
             free_tokens(tokens);
+            free(line);
             continue;
         }
 
